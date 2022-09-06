@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 })
 
 // GET /dinosaurs -- show all dinos
-app.get('/dinsaurs', (req, res) => {
+app.get('/dinosaurs', (req, res) => {
     res.send('Show all dinos')
 })
 
