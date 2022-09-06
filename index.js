@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // route definitions
 app.get('/', (req, res) => {
-    res.send(`Welcome to the dino CRUD app 🦖`)
+    res.render('home.ejs')
 })
 
 // GET /dinosaurs -- show all dinos
@@ -32,12 +32,14 @@ app.get('/dinosaurs', (req, res) => {
     // console.log(dinoData)
     // send the dino info to the client
     // TODO: add ejs view
-    res.json(dinoData)
+    res.render('dinos/index.ejs', {
+        dinos: dinoData
+    })
 })
 
 // GET /dinosaurs/new -- display a form to create a new dino
 app.get('/dinosaurs/new', (req, res) => {
-    res.send('Show a form to create a new dino')
+    res.render('dinos/new.ejs')
 })
 
 // POST /dinosaurs -- create a new dino in the DB
