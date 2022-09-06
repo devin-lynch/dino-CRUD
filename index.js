@@ -17,6 +17,8 @@ const app = express()
 const PORT = 3002
 app.set('view engine', 'ejs')
 app.use(layout)
+// tell express to listen for request bodies sent from HTML forms
+app.use(express.urlencoded({ extended: false }))
 
 // route definitions
 app.get('/', (req, res) => {
@@ -45,9 +47,13 @@ app.post('/dinosaurs', (req, res) => {
     // payload of data from the request body (req.body)
     // push the data payload into the array of dinos
     console.log(req.body)
+    dinoData.push(req.body)
     // save the dino file
+    fs.writeFileSync('./dinosaurs.json', JSON.stringify(dinoData))
     // on POST routes -- DO NOT RENDER A TEMPLATE (this rule can be broken)
     // redirect to where you can find a template
+    // redirects tell browsers to make a GET request on a url
+    res.redirect('/dinosaurs')
 })
 
 // GET /dinosaurs/:id -- display the details of one specific dino
