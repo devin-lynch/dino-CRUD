@@ -68,5 +68,26 @@ app.get('/dinosaurs/:id', (req, res) => {
     res.json(dino)
 })
 
+
+// -------------------------------------------------------
+app.get('/prehistoric_creatures', (req, res) => {
+    res.send(`Displays all prehistoric creatures!`)
+})
+
+app.get('/prehistoric_creatures/:id', (req, res) => {
+    res.send(`Displays the type and photo of a particular prehistoric creature (id = )`)
+})
+
+app.get('/prehistoric_creatures/new', (req, res) => {
+    res.send(`Shows a form for adding a new prehistoric creature`)
+})
+
+app.post('/prehistoric_creatures', (req, res) => {
+    res.send(`Creates a prehistoric creature with the POST payload data`)
+})
+
+
+
+
 // listen on a port
 app.listen(PORT, () => console.log(`is that dinos I hear on port ${PORT} 🦕`))
