@@ -12,6 +12,12 @@ const readDinoFile = () => {
         return dinoData
 }
 
+const readCreatureFile = () => {
+    const creatures = fs.readFileSync('./prehistoric_creatures.json')
+    const creatureData = JSON.parse(creatures)
+    return creatureData
+}
+
 // express app config
 const app = express()
 const PORT = 3002
@@ -70,21 +76,29 @@ app.get('/dinosaurs/:id', (req, res) => {
 
 
 // -------------------------------------------------------
+// GET /prehistoric_creatures -- show all prehistoric creatures
 app.get('/prehistoric_creatures', (req, res) => {
-    res.send(`Displays all prehistoric creatures!`)
+    const creatureData = readCreatureFile()
+    res.render(`prehistoric-creatures/index.ejs`, {
+        creatures: creatureData
+    })
 })
 
+// GET /prehistoric_creatures/new -- display a form to create a new prehistoric creature
+app.get('/prehistoric_creatures/new', (req, res) => {
+    res.render(`prehistoric-creatures/new.ejs`)
+})
+
+// POST /prehistoric_creatures -- create a new dino in the DB
+app.post('/prehistoric_creatures', (req, res) => {
+    res.send(`Creates a prehistoric creature with the POST payload data`)
+})
+
+// GET /prehistoric_creatures/:id -- display the detail of one specific prehistoric creature
 app.get('/prehistoric_creatures/:id', (req, res) => {
     res.send(`Displays the type and photo of a particular prehistoric creature (id = )`)
 })
 
-app.get('/prehistoric_creatures/new', (req, res) => {
-    res.send(`Shows a form for adding a new prehistoric creature`)
-})
-
-app.post('/prehistoric_creatures', (req, res) => {
-    res.send(`Creates a prehistoric creature with the POST payload data`)
-})
 
 
 
