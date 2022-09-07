@@ -6,12 +6,12 @@
     POST forms put the data in the request body -- and in express we access it through the req.body (used for CREATE queries)
  -->
 
-<form method="POST" action="/dinosaurs">
-    <label for="creatureName">Name:</label>
-    <input id="creatureName" type="text" name="name" />
-
+<form method="POST" action="/prehistoric_creatures">
     <label for="creatureType">Type:</label>
     <input id="creatureType" type="text" name="type" />
+
+    <label for="creatureImg">Image:</label>
+    <input id="creatureImg" type="text" name="img_url" />
 
     <button type-="submit">Create Prehistoric Creature</button>
 </form>

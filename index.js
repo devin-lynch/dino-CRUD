@@ -91,12 +91,18 @@ app.get('/prehistoric_creatures/new', (req, res) => {
 
 // POST /prehistoric_creatures -- create a new dino in the DB
 app.post('/prehistoric_creatures', (req, res) => {
-    res.send(`Creates a prehistoric creature with the POST payload data`)
+    const creatureData = readCreatureFile()
+    console.log(req.body)
+    creatureData.push(req.body)
+    fs.writeFileSync('./prehistoric_creatures.json', JSON.stringify(creatureData))
+    res.redirect(`/prehistoric_creatures`)
 })
 
 // GET /prehistoric_creatures/:id -- display the detail of one specific prehistoric creature
 app.get('/prehistoric_creatures/:id', (req, res) => {
-    res.send(`Displays the type and photo of a particular prehistoric creature (id = )`)
+    const creatureData = readCreatureFile()
+    const creature = creatureData[req.params.id]
+    res.json(creature)
 })
 
 
